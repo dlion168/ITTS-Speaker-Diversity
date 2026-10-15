@@ -1,0 +1,8 @@
+# Paper §3.2 and Appendix A
+corpus: LibriSpeech train-clean-100   # TODO confirm (file name metric_curves_251_n240 suggests 251 speakers)
+k: [6, 8, 10, 12, 15, 20, 24, 30, 40, 48, 60, 80, 120, 240]
+subset_size: 240
+subsets_per_k: 100
+metrics: [mpcd, vendi, chamfer, mmd]
+reference_pool: TODO   # utterances used as R for Chamfer and MMD
+seed: TODO

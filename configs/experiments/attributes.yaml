@@ -1,0 +1,18 @@
+# Paper §5
+single_attribute:
+  gender:  [female, male]
+  age:     [child, young_adult, middle_aged, elderly]
+  accent:  [north_american, british_isles, oceanian, south_asian, south_african, germanic]
+  emotion: [angry, happy, neutral, sad]
+  utterances_per_value: 3000
+  templates_per_value: 5
+gender_x_age:
+  cells: [female_child, female_young_adult, female_middle_aged, female_elderly, male_child, male_young_adult, male_middle_aged, male_elderly]
+  utterances_per_cell: 6000
+  templates_per_cell: 10
+confidence_interval:
+  subset_size_N: 1500
+  draws_B: 10000
+  percentiles: [2.5, 97.5]
+  rescale_c: "sqrt(N / (n - N)); 1.0 for n = 3000, 0.577 for n = 6000"
+  encoders: retained   # averaged per draw

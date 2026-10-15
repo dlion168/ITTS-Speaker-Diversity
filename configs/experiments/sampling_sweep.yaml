@@ -1,0 +1,8 @@
+# Paper §4.2
+values: [0.5, 1.0, 1.5, 2.0, 2.5]
+seeds: TODO          # 3 seeds; fill in the actual seed values
+utterances_per_config: 10000
+systems:
+  moss-voicegen: {param: temperature, flag: "--moss_audio_temperature"}
+  voxinstruct:   {param: cfg, flag: TODO}   # VoxInstruct has three cfg scales; record which one(s) were swept
+  voxcpm2:       {param: cfg, flag: "--voxcpm_cfg_value"}

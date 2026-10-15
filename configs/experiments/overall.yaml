@@ -1,0 +1,6 @@
+# Paper §4.1
+instruction: "Speak in a natural voice."   # TODO verify this is what was actually passed (old README mentions Emilia descriptions)
+partitions: [1, 2, 3]
+texts_per_partition: 10000
+text_source: data/emilia/overall_partition_{1,2,3}.jsonl
+encoders: retained   # the 8 retained encoders in configs/encoders.yaml
