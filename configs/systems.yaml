@@ -1,0 +1,9 @@
+# The 7 ITTS systems in the paper. Fill in `revision` (HF commit) and `upstream_commit` (git rev-parse HEAD of the cloned repo).
+systems:
+  - {code_name: moss-voicegen,     split_name: moss_voicegen, paper_name: MOSS-VoiceGenerator, hf_id: "OpenMOSS-Team/MOSS-VoiceGenerator", revision: TODO, env: itts_moss,     upstream_repo: MOSS-TTS,   upstream_commit: TODO, default_decoding: TODO}
+  - {code_name: parler-large,      split_name: parler_large,  paper_name: Parler-TTS Large v1, hf_id: "parler-tts/parler-tts-large-v1",    revision: TODO, env: itts_parler,   default_decoding: TODO}
+  - {code_name: parler-mini,       split_name: parler_mini,   paper_name: Parler-TTS Mini v1,  hf_id: "parler-tts/parler-tts-mini-v1",     revision: TODO, env: itts_parler,   default_decoding: TODO}
+  - {code_name: capspeech,         split_name: capspeech_nar, paper_name: CapSpeech-NAR,       hf_id: "OpenSound/CapSpeech-models",        revision: TODO, env: itts_capspeech, upstream_repo: CapSpeech, upstream_commit: TODO, default_decoding: TODO}
+  - {code_name: qwen3-voicedesign, split_name: qwen3_tts,     paper_name: Qwen3-TTS Voice Design 1.7B, hf_id: "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign", revision: TODO, env: itts_qwen, default_decoding: TODO}
+  - {code_name: voxinstruct,       split_name: voxinstruct,   paper_name: VoxInstruct,         hf_id: null, weights: "Google Drive (see generation/README.md)", env: itts_vox, upstream_repo: "thuhcsi/VoxInstruct", upstream_commit: TODO, default_decoding: TODO}
+  - {code_name: voxcpm2,           split_name: voxcpm2,       paper_name: VoxCPM2,             hf_id: "openbmb/VoxCPM2",                   revision: TODO, env: itts_voxcpm2,  upstream_repo: VoxCPM,    upstream_commit: TODO, default_decoding: TODO}

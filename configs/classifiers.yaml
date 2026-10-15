@@ -1,0 +1,10 @@
+# Controllability classifiers (paper §3.5, Appendix B). Chance = 1/K.
+classifiers:
+  gender:  {checkpoint: "tiantiaf/wavlm-large-age-sex", head: sex, classes: [female, male], chance: 0.5}
+  age:     {checkpoint: "tiantiaf/wavlm-large-age-sex", head: age_regressor, bins_years: [20, 40, 60], classes: [child, young_adult, middle_aged, elderly], chance: 0.25}
+  emotion: {checkpoint: "emotion2vec/emotion2vec_plus_large", restrict_argmax_to: [angry, happy, neutral, sad], chance: 0.25}
+  accent:  {checkpoint: "Snooow1029/itts-attribute-classifiers (accent_wavlm + accent_whisper, softmax-averaged ensemble)", backbones: ["microsoft/wavlm-large", "openai/whisper-large-v3"], lora_rank: 16,
+            classes: [north_american, british_isles, oceanian, south_asian, south_african, germanic], chance: 0.1667}
+notes:
+  - "Keep one batch size across all shards (Vox-Profile wrappers pad per batch)."
+  - "Mark loralib layers as merged after load_state_dict (see controllability/README.md)."

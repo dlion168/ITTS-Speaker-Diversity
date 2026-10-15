@@ -1,0 +1,16 @@
+# Speaker encoders. `code_name` is the name used in embedding folders and result CSVs.
+# `checkpoint` is what the code actually loads (from the old repo's speaker_embedding_eval/README.md §4.1).
+# `paper_abbrev` is the abbreviation used in the paper.
+encoders:
+  - {code_name: nemo_titanet,       paper_abbrev: TIT,   retained: true,  dim: 192, env: itts_nemo,  checkpoint: "nvidia/speakerverification_en_titanet_large", training_data: "VoxCeleb, Fisher, Switchboard, LibriSpeech, SRE (English)", weights_license: "CC-BY-4.0"}
+  - {code_name: speechbrain_ecapa,  paper_abbrev: SBEC,  retained: true,  dim: 192, env: itts_embed, checkpoint: "speechbrain/spkrec-ecapa-voxceleb", training_data: VoxCeleb, weights_license: "Apache-2.0"}
+  - {code_name: speechbrain_resnet, paper_abbrev: SBRN,  retained: true,  dim: 256, env: itts_embed, checkpoint: "speechbrain/spkrec-resnet-voxceleb", training_data: VoxCeleb, weights_license: "Apache-2.0"}
+  - {code_name: wespeaker,          paper_abbrev: WS221, retained: true,  dim: 256, env: itts_embed, checkpoint: "wespeaker load_model('english') -> voxceleb_resnet221_LM", training_data: VoxCeleb, weights_license: "CC-BY-4.0 (follows VoxCeleb)"}
+  - {code_name: wespeaker_voxblink2_resnet152_16k, paper_abbrev: WSVB, retained: true, dim: 256, env: itts_embed, checkpoint: "wespeaker load_model('vblinkp') -> voxblink2_samresnet34 (SimAM-ResNet34; the code name is a misnomer)", training_data: VoxBlink2, weights_license: "CC-BY-NC-SA-4.0 (follows VoxBlink2)"}
+  - {code_name: modelscope_eres2net,   paper_abbrev: ER2,   retained: true, dim: 192, env: itts_embed, checkpoint: "iic/speech_eres2net_sv_zh-cn_16k-common",   training_data: "200k Mandarin speakers", weights_license: TODO}
+  - {code_name: modelscope_eres2netv2, paper_abbrev: ER2v2, retained: true, dim: 192, env: itts_embed, checkpoint: "iic/speech_eres2netv2_sv_zh-cn_16k-common", training_data: "200k Mandarin speakers", weights_license: TODO}
+  - {code_name: modelscope_campplus,   paper_abbrev: CAM,   retained: true, dim: 192, env: itts_embed, checkpoint: "iic/speech_campplus_sv_zh-cn_16k-common",   training_data: "200k Mandarin speakers", weights_license: TODO}
+  # Excluded after validation (paper §3.2). Checkpoints to be confirmed by whoever ran the LibriSpeech study.
+  - {code_name: speechbrain_xvector,        paper_abbrev: XV,   retained: false, dim: 512, env: itts_validation, checkpoint: "TODO confirm (likely speechbrain/spkrec-xvect-voxceleb)", weights_license: TODO}
+  - {code_name: wavlm_base_plus_sv,         paper_abbrev: WLM,  retained: false, dim: 512, env: itts_validation, checkpoint: "microsoft/wavlm-base-plus-sv", weights_license: MIT}
+  - {code_name: unispeech_sat_base_plus_sv, paper_abbrev: USAT, retained: false, dim: 512, env: itts_validation, checkpoint: "microsoft/unispeech-sat-base-plus-sv", weights_license: MIT}
