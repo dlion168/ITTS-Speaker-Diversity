@@ -1,0 +1,14 @@
+# large artifacts live on Hugging Face, not in git
+*.wav
+*.flac
+*.npy
+*.npz
+*.pt
+*.ckpt
+weights/
+envs/*/
+data/outputs/
+data/embeddings*/
+__pycache__/
+*.pyc
+.DS_Store
