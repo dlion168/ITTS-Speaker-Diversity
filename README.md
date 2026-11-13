@@ -1,5 +1,10 @@
 # ITTS Speaker Diversity
 
+[![HF Dataset](https://img.shields.io/badge/HF%20Dataset-itts--speaker--diversity-yellow)](https://huggingface.co/datasets/dlion168/itts-speaker-diversity)
+[![HF Model](https://img.shields.io/badge/HF%20Model-itts--attribute--classifiers-yellow)](https://huggingface.co/Snooow1029/itts-attribute-classifiers)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+[![Data: CC BY-NC 4.0](https://img.shields.io/badge/data-CC%20BY--NC%204.0-lightgrey)](DATA_LICENSE.md)
+
 Code to reproduce the experiments of **"Beyond Controllability: Speaker Diversity in Instruction-Guided Text-to-Speech"**.
 
 Instruction-guided text-to-speech (ITTS) systems create a voice from a written description, such as
