@@ -1,0 +1,47 @@
+# large artifacts live on Hugging Face, not in git
+*.wav
+*.flac
+*.npy
+*.npz
+*.pt
+*.ckpt
+*.parquet
+/results/reproductions/
+*.tar
+*.tar.gz
+*.tar.zst
+weights/
+envs/*/
+data/outputs/
+data/embeddings*/
+data/controllability/
+data/real_world_data/
+real_world_data
+__pycache__/
+*.pyc
+.DS_Store
+logs/
+
+# controllability: third-party model code and downloaded checkpoints
+controllability/vox-profile-release/
+controllability/checkpoint/
+
+# upstream repositories cloned for generation (not part of this repo)
+CapSpeech/
+MOSS-TTS/
+VoxCPM/
+
+# accent classifier: corpus mirrors and split shards (third-party audio)
+controllability/accent_classifier/data/
+controllability/accent_classifier/splits/
+
+# encoder validation: LibriSpeech audio and the regenerated subset lists
+data/librispeech/
+data/librispeech_validation/
+
+# generation inputs and run folders, local secrets
+data/generation_inputs/
+data/generation_runs/
+.env
+.env.*
+.hf_token

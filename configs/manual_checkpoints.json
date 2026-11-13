@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "voxinstruct": {
+    "ar_1800k.pyt": {
+      "bytes": 1938043033,
+      "sha256": "851775ce33d6652656963e9011c83d41cc45acebaf3d1e128cc8670743a38d5d"
+    },
+    "nar_1800k.pyt": {
+      "bytes": 2005122535,
+      "sha256": "2758b0db3ba97cbb662aee5d38431a4cdb62a95e88b94ce9ca8ab63fe5b61022"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Paper §4.1
+instruction: "Speak like a person — natural, neutral tone, moderate pace, conversational and clear delivery."
+partitions: [1, 2, 3]
+texts_per_partition: 10000
+text_source: data/emilia/overall_partition_{partition}.jsonl
+generation_seed: 0
+encoders: retained   # the 8 retained encoders in configs/encoders.yaml

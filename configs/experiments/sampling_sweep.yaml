@@ -1,0 +1,13 @@
+# Paper §4.2
+values: [0.5, 1.0, 1.5, 2.0, 2.5]
+seeds: [17, 42, 99]
+utterances_per_config: 10000
+text_source: data/emilia/overall_partition_1.jsonl
+evaluation:            # experiments/03_sampling_sweep/summarize.py
+  subset_n: 3000       # Vendi depends on n; every configuration is scored on the same 3,000 texts
+  subset: "sorted(np.random.default_rng(42).choice(10000, 3000, replace=False))"
+  real_baseline: "real Emilia partition 1, np.random.default_rng(42).permutation(10000)[:3000]"
+systems:
+  moss-voicegen: {param: temperature, flag: "--moss_audio_temperature"}
+  voxinstruct:   {param: cfg, flag: "--vox_cfg_st_on_text"}  # Semantic/text CFG used by the recorded sweep.
+  voxcpm2:       {param: cfg, flag: "--voxcpm_cfg_value"}

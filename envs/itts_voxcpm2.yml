@@ -1,0 +1,34 @@
+# VoxCPM2 generation environment.
+# After creating it, install the VoxCPM source at the commit in configs/systems.yaml with --no-deps (envs/README.md).
+name: itts_voxcpm2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.9.1+cu128
+      - torchaudio==2.9.1+cu128
+      - numpy
+      - PyYAML
+      - torchcodec==0.8.1
+      - transformers
+      - einops
+      - inflect
+      - addict
+      - wetext
+      - modelscope
+      - datasets>=3,<4
+      - huggingface-hub
+      - pydantic
+      - tqdm
+      - simplejson
+      - sortedcontainers
+      - soundfile
+      - librosa
+      - matplotlib
+      - funasr
+      - spaces
+      - argbind
+      - safetensors

@@ -1,0 +1,82 @@
+{
+  "tag": "voxprofile_released",
+  "mapping": "narrow16->7(6regions+Other)",
+  "corpora": {
+    "saa": {
+      "acc": 0.5037,
+      "uar": 0.5305,
+      "n": 669,
+      "per_region_recall": {
+        "English": 0.7237,
+        "Germanic": 0.0602,
+        "North America": 0.5372,
+        "Oceania": 0.5,
+        "South African": 0.75,
+        "South Asia": 0.6122
+      },
+      "per_region_n": {
+        "English": 76,
+        "Germanic": 83,
+        "North America": 417,
+        "Oceania": 40,
+        "South African": 4,
+        "South Asia": 49
+      }
+    },
+    "nchlt": {
+      "acc": 0.3898,
+      "uar": 0.3898,
+      "n": 3053,
+      "per_region_recall": {
+        "South African": 0.3898
+      },
+      "per_region_n": {
+        "South African": 3053
+      }
+    },
+    "edacc": {
+      "acc": 0.7185,
+      "uar": 0.6806,
+      "n": 3798,
+      "per_region_recall": {
+        "English": 0.5477,
+        "Germanic": 0.8182,
+        "North America": 0.1323,
+        "Other": 0.8856,
+        "South African": 0.7308,
+        "South Asia": 0.9689
+      },
+      "per_region_n": {
+        "English": 765,
+        "Germanic": 22,
+        "North America": 499,
+        "Other": 2273,
+        "South African": 78,
+        "South Asia": 161
+      }
+    },
+    "vctk": {
+      "acc": 0.5,
+      "uar": 0.5,
+      "n": 600,
+      "per_region_recall": {
+        "English": 0.6,
+        "North America": 0.4
+      },
+      "per_region_n": {
+        "English": 300,
+        "North America": 300
+      }
+    }
+  },
+  "pooled_per_region_recall": {
+    "English": 0.5732,
+    "Germanic": 0.219,
+    "North America": 0.3372,
+    "Oceania": 0.5,
+    "Other": 0.8856,
+    "South African": 0.3987,
+    "South Asia": 0.8857
+  },
+  "pooled_uar": 0.5428
+}

@@ -1,0 +1,30 @@
+# VoxInstruct generation environment.
+# VoxInstruct also needs the patched upstream code (generation/patches/voxinstruct/README.md).
+name: itts_vox
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.9.1+cu128
+      - torchaudio==2.9.1+cu128
+      - numpy
+      - PyYAML
+      - transformers
+      - soundfile
+      - tqdm
+      - accelerate
+      - librosa
+      - encodec
+      - peft
+      - matplotlib
+      - vocos
+      - scipy
+      - einops
+      - hydra-core
+      - omegaconf
+      - sentencepiece
+      - protobuf
+      - tiktoken

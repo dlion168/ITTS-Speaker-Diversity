@@ -1,0 +1,9 @@
+id,text,style_prompt,ref_audio,ref_text,language
+001,"Hello! How are you doing today? I hope you're having a wonderful day.","A warm and friendly female voice with moderate speed, clear pronunciation, and a pleasant tone. The recording quality is high and the voice sounds very natural.",,,"en"
+002,"The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.","A deep, authoritative male narrator voice with steady pacing and excellent clarity. Very close microphone placement with no background noise.",,,"en"
+003,"今天天氣真的很好，我們一起出去走走吧！","充滿活力和開朗的年輕女聲，語速適中，帶有輕微的愉快情緒，音質清晰自然。",,,"zh"
+004,"Welcome to our service. Please listen carefully to the following options.","A professional, calm, and clear female voice suitable for an automated phone system. Neutral American English accent with even pacing.",,,"en"
+005,"Once upon a time, in a land far far away, there lived a brave young knight.","A gentle, storytelling voice with warm timbre, slightly slower pace, and expressive intonation suitable for children's stories.",,,"en"
+006,"科技改變了我們的生活方式，讓溝通變得更加便利。","沉穩專業的男聲，語速平緩，具有播音員的清晰度和標準普通話發音。",,,"zh"
+007,"I can't believe how amazing this new technology is! This changes everything!","An excited, energetic young male voice with enthusiastic delivery, slightly faster pace, and high energy in the tone.",,,"en"
+008,"Ladies and gentlemen, we are gathered here today to celebrate a very special occasion.","A formal, dignified male speaker with measured pace, resonant voice, and ceremonial intonation.",,,"en"

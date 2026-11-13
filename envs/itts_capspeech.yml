@@ -1,0 +1,31 @@
+# CapSpeech-NAR generation environment.
+# After creating it, install the CapSpeech source at the commit in configs/systems.yaml with --no-deps (envs/README.md).
+name: itts_capspeech
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.9.1+cu128
+      - torchaudio==2.9.1+cu128
+      - torchvision==0.24.1+cu128
+      - transformers==4.46.1
+      - numpy
+      - huggingface-hub
+      - soundfile
+      - librosa
+      - scipy
+      - matplotlib
+      - einops
+      - x-transformers
+      - torchdiffeq
+      - g2p_en
+      - laion_clap
+      - sentencepiece
+      - pyyaml
+      - accelerate
+      - jieba
+      - pypinyin
+      - ema-pytorch

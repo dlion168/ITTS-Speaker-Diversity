@@ -1,0 +1,38 @@
+{
+  "tag": "6cls_ensemble_ID",
+  "labels": [
+    "North America",
+    "English",
+    "South Asia",
+    "Germanic",
+    "Oceania",
+    "South African"
+  ],
+  "acc": 0.8733,
+  "macro_f1": 0.8757,
+  "uar": 0.873,
+  "per_class_f1": {
+    "North America": 0.8808,
+    "English": 0.8249,
+    "South Asia": 0.9183,
+    "Germanic": 0.8872,
+    "Oceania": 0.8725,
+    "South African": 0.8707
+  },
+  "per_class_recall": {
+    "North America": 0.8885,
+    "English": 0.875,
+    "South Asia": 0.8825,
+    "Germanic": 0.8711,
+    "Oceania": 0.8775,
+    "South African": 0.8435
+  },
+  "per_class_n": {
+    "North America": 2000,
+    "English": 2000,
+    "South Asia": 2000,
+    "Germanic": 551,
+    "Oceania": 2000,
+    "South African": 2000
+  }
+}

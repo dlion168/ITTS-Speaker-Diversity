@@ -1,0 +1,21 @@
+{
+  "dataset": "amphion/Emilia-Dataset",
+  "data_files": [
+    "Emilia/EN/*.tar"
+  ],
+  "split": "en",
+  "shuffle_seed": 42,
+  "assign_seed": 137,
+  "shuffle_buffer": 50000,
+  "n_per_set": 10000,
+  "n_sets": 3,
+  "filters": {
+    "boh_enabled": true,
+    "boh_mode": "curated",
+    "boh_min_count": 10,
+    "boh_min_phrase_len": 6,
+    "lang_id_backend": "fasttext",
+    "lang_min_prob": 0.85,
+    "lang_min_text_len": 20
+  }
+}

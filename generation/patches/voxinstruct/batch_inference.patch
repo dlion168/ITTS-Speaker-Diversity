@@ -1,0 +1,382 @@
+diff --git a/inference.py b/inference.py
+index e85cb3e..acfb9e8 100644
+--- a/inference.py
++++ b/inference.py
+@@ -168,6 +168,228 @@ class InferVoxDataset(Dataset):
+         return text_ids, text_id_lens, seqs, seq_lens, full_seqs, segment_ids, cond_acoustics, basenames
+ 
+ 
++@torch.no_grad()
++def generate_batched(args, hp, models, device,
++                     text_ids, text_id_lens, seqs, segment_ids, cond_acoustics, basenames):
++    """
++    Cross-sample batched AR generation for the no-reference-audio case (at_prompt_len == 0).
++
++    All samples start with a uniform-length sequence ([bos, lang]) and grow by one token
++    per step, so the whole batch advances in lockstep. Per-sample ST->AT phase switches and
++    EOS are tracked with boolean masks. Because no acoustic prompt is appended at the switch,
++    the KV caches never need to be reset and simply grow by one token each step. NAR refinement
++    and vocoding are run per sample afterwards (NAR.predict only supports batch_size == 1).
++    """
++    ar_model, nar_model, encodec, vocos = models
++    B = seqs.shape[0]
++    n_codebook = hp.at_res_num
++    text_attn_mask = sequence_mask(text_id_lens, max_len=hp.max_text_len, device=device)
++    free_text_encode = torch.zeros([B, hp.max_text_len, hp.hidden_dim], device=device).to(torch.bfloat16)
++
++    use_st_cfg = args.cfg_st_on_text != 1.0
++    use_at_cfg_text = args.cfg_at_on_text != 1.0
++    use_at_cfg_st = args.cfg_at_on_st != 1.0
++    need_free = use_st_cfg or use_at_cfg_text
++
++    pkv_base = None
++    pkv_free = None
++    pkv_maskst = None
++    cond_text_encode = None
++    uncond_free = None
++    uncond_maskst = None
++
++    pred_st_flag = torch.ones(B, dtype=torch.bool, device=device)   # True = still predicting semantic (ST) tokens
++    finished = torch.zeros(B, dtype=torch.bool, device=device)
++    finish_len = torch.full((B,), hp.max_len + 2, dtype=torch.long, device=device)
++    st_len = torch.zeros(B, dtype=torch.long, device=device)
++
++    for j in tqdm(range(hp.max_len)):
++        # ---- base pass (text-conditioned) ----
++        out_base, cond_text_encode = ar_model.predict(
++            input_ids=seqs, segment_ids=segment_ids, text_ids=text_ids,
++            text_attn_mask=text_attn_mask, past_key_values=pkv_base,
++            text_encode=cond_text_encode,
++        )
++        cond_logits = out_base['logits'][:, -1, :]
++        pkv_base = out_base['past_key_values']
++
++        # ---- free pass (text masked) : used by ST-cfg-on-text and AT-cfg-on-text ----
++        if need_free:
++            out_free, _ = ar_model.predict(
++                input_ids=seqs, segment_ids=segment_ids, text_ids=text_ids,
++                text_attn_mask=text_attn_mask, past_key_values=pkv_free,
++                text_encode=free_text_encode,
++            )
++            uncond_free = out_free['logits'][:, -1, :]
++            pkv_free = out_free['past_key_values']
++
++        # ---- mask-st pass (semantic tokens masked) : used by AT-cfg-on-st ----
++        # Lazily started the first time any sample enters the AT phase. Since a sample never
++        # leaves the AT phase, once started this pass runs every subsequent step (cache stays in sync).
++        run_maskst = use_at_cfg_st and bool((~pred_st_flag).any())
++        if run_maskst:
++            out_maskst, _ = ar_model.predict(
++                input_ids=seqs, segment_ids=segment_ids, text_ids=text_ids,
++                text_attn_mask=text_attn_mask, past_key_values=pkv_maskst,
++                text_encode=cond_text_encode, mask_st=True,
++            )
++            uncond_maskst = out_maskst['logits'][:, -1, :]
++            pkv_maskst = out_maskst['past_key_values']
++
++        # ---- per-sample classifier-free-guidance combine + sampling ----
++        next_tokens = torch.zeros(B, dtype=torch.long, device=device)
++        for b in range(B):
++            if finished[b]:
++                continue
++            if pred_st_flag[b]:
++                if use_st_cfg:
++                    lg = uncond_free[b] + (cond_logits[b] - uncond_free[b]) * args.cfg_st_on_text
++                else:
++                    lg = cond_logits[b].clone()
++                lg[hp.bos_id] = -1e5
++                lg[hp.st_token_num + 1:hp.eos_id] = -1e5
++                lg[hp.eos_id + 1] = -1e5
++                filtered = top_k_top_p_filtering(lg, top_k=5, top_p=0.95, temperature=0.8)
++            else:
++                cl = cond_logits[b]
++                applied_cfg = False
++                if use_at_cfg_text:
++                    cl = uncond_free[b] + (cl - uncond_free[b]) * args.cfg_at_on_text
++                    applied_cfg = True
++                if use_at_cfg_st:
++                    cl = uncond_maskst[b] + (cl - uncond_maskst[b]) * args.cfg_at_on_st
++                    applied_cfg = True
++                lg = cl if applied_cfg else cl.clone()
++                lg[hp.bos_id] = -1e5
++                lg[0:hp.st_token_num + 1] = -1e5
++                lg[hp.eos_id] = -1e5
++                filtered = top_k_top_p_filtering(lg, top_k=50, top_p=0.95, temperature=0.8)
++            probs = filtered.softmax(dim=-1)
++            next_tokens[b] = torch.multinomial(probs, 1)
++
++        # ---- append sampled tokens and their segment ids ----
++        seqs = torch.cat([seqs, next_tokens.unsqueeze(1)], dim=1)
++        new_seg = torch.where(pred_st_flag, torch.ones_like(next_tokens), torch.full_like(next_tokens, 2))
++        segment_ids = torch.cat([segment_ids, new_seg.unsqueeze(1)], dim=1)
++        cur_len = seqs.shape[1]
++
++        # ---- ST -> AT switch (sampled the ST end-of-sequence token) ----
++        just_switch = pred_st_flag & (~finished) & (next_tokens == hp.eos_id)
++        if bool(just_switch.any()):
++            for b in torch.nonzero(just_switch).flatten().tolist():
++                pred_st_flag[b] = False
++                st_len[b] = int((segment_ids[b] == 1).sum())
++
++        # ---- AT finish (sampled the AT end-of-sequence token) ----
++        just_finish = (~pred_st_flag) & (~finished) & (next_tokens == hp.eos_id + 1)
++        if bool(just_finish.any()):
++            for b in torch.nonzero(just_finish).flatten().tolist():
++                finished[b] = True
++                finish_len[b] = cur_len
++
++        # ---- max length reached: force-finish any remaining samples ----
++        if j == hp.max_len - 1:
++            for b in range(B):
++                if not finished[b]:
++                    seqs[b, -1] = hp.eos_id + 1
++                    if bool(pred_st_flag[b]):
++                        st_len[b] = int((segment_ids[b] == 1).sum())
++                    finished[b] = True
++                    finish_len[b] = cur_len
++
++        if bool(finished.all()):
++            break
++
++    # ---- NAR refinement + vocoding ----
++    use_nar_batch = os.environ.get("VOX_NAR_BATCH", "0") == "1"
++
++    def _vocode_and_save(full_seq_codes, stl, basename):
++        full_seq = full_seq_codes[:, :, stl:]  # [1, n_codebook, t']
++        full_seq = (full_seq - hp.st_token_num - hp.lang_num - 1)[:, :, :-1].clamp(0, 1023)
++        name = basename.replace('/', '_')
++        if args.vocoder == "vocos":
++            features = vocos.codes_to_features(full_seq[0])
++            bandwidth_id = torch.tensor([2], device=device)  # 6 kbps
++            wav = vocos.decode(features, bandwidth_id=bandwidth_id)
++            wav = wav.cpu().squeeze(1).squeeze(0).numpy()
++            save_wav(wav, os.path.join(args.out_dir, '{}.wav'.format(name)), sr=24000)
++        else:
++            wav = encodec.decode([(full_seq, None)])
++            wav = wav.cpu().squeeze(1).squeeze(0).numpy()
++            save_wav(wav, os.path.join(args.out_dir, 'infer-encodec-{}.wav'.format(name)), sr=24000)
++
++    if use_nar_batch:
++        # ---- batched NAR: one transformer forward per (layer, iter) for the whole batch ----
++        Lb = torch.minimum(finish_len, torch.full_like(finish_len, seqs.shape[1]))  # [B]
++        max_t = int(Lb.max())
++        pos = torch.arange(max_t, device=device).unsqueeze(0)            # [1, max_t]
++        valid = pos < Lb.unsqueeze(1)                                    # [B, max_t]
++        seqs_p = torch.where(valid, seqs[:, :max_t], torch.zeros_like(seqs[:, :max_t]))
++        seg_p = torch.where(valid, segment_ids[:, :max_t], torch.zeros_like(segment_ids[:, :max_t]))
++
++        full_seqs = torch.stack([seqs_p] * n_codebook, dim=1)            # [B, n_codebook, max_t]
++        keep_layer0 = (torch.arange(n_codebook, device=device) < 1).view(1, n_codebook, 1)
++        keep_st = (st_len.unsqueeze(1) > pos).unsqueeze(1)               # [B, 1, max_t]
++        full_seqs = torch.where(keep_layer0 | keep_st, full_seqs, torch.zeros_like(full_seqs))
++
++        audio_attn_mask = valid.to(text_attn_mask.dtype)                 # [B, max_t]
++        for layer_index in range(1, n_codebook):
++            full_seqs = nar_model.predict_batched(
++                full_seqs, Lb, seg_p, audio_attn_mask,
++                text_ids=text_ids, text_attn_mask=text_attn_mask,
++                layer_index=layer_index, iter_step=args.nar_iter_steps,
++            )
++        for b in range(B):
++            try:
++                _vocode_and_save(full_seqs[b:b + 1, :, :int(Lb[b])], int(st_len[b]), basenames[b])
++            except Exception as e:
++                print(f"[generate_batched] failed to decode sample '{basenames[b]}': {e}")
++        return
++
++    # ---- NAR refinement + vocoding, per sample (default) ----
++    for b in range(B):
++        try:
++            L = min(int(finish_len[b]), seqs.shape[1])
++            seq_b = seqs[b:b + 1, :L]
++            seg_b = segment_ids[b:b + 1, :L]
++            text_b = text_ids[b:b + 1]
++            tam_b = text_attn_mask[b:b + 1]
++            stl = int(st_len[b])
++            t = seq_b.shape[1]
++
++            full_seqs = torch.stack([seq_b] * n_codebook, dim=1)  # [1, n_codebook, t]
++            layer_index = torch.ones(size=[1], device=device)
++            mask1 = layer_index.unsqueeze(1) > torch.arange(n_codebook, device=device).unsqueeze(0)
++            mask2 = torch.tensor([stl], device=device).unsqueeze(1) > torch.arange(t, device=device).unsqueeze(0)
++            mask = mask1.unsqueeze(2) + mask2.unsqueeze(1)
++            full_seqs = torch.where(mask, full_seqs, torch.zeros_like(full_seqs))
++            for layer_index in range(1, n_codebook):
++                full_seqs = nar_model.predict(full_seqs,
++                                              0,
++                                              seg_b,
++                                              text_ids=text_b,
++                                              text_attn_mask=tam_b,
++                                              layer_index=layer_index,
++                                              iter_step=args.nar_iter_steps)
++
++            full_seq = full_seqs[:, :, stl:]  # [1, n_codebook, t']
++            full_seq = (full_seq - hp.st_token_num - hp.lang_num - 1)[:, :, :-1].clamp(0, 1023)
++
++            name = basenames[b].replace('/', '_')
++            if args.vocoder == "vocos":
++                features = vocos.codes_to_features(full_seq[0])
++                bandwidth_id = torch.tensor([2], device=device)  # 6 kbps
++                wav = vocos.decode(features, bandwidth_id=bandwidth_id)
++                wav = wav.cpu().squeeze(1).squeeze(0).numpy()
++                save_wav(wav, os.path.join(args.out_dir, '{}.wav'.format(name)), sr=24000)
++            else:
++                wav = encodec.decode([(full_seq, None)])
++                wav = wav.cpu().squeeze(1).squeeze(0).numpy()
++                save_wav(wav, os.path.join(args.out_dir, 'infer-encodec-{}.wav'.format(name)), sr=24000)
++        except Exception as e:
++            print(f"[generate_batched] failed to decode sample '{basenames[b]}': {e}")
++
++
+ @torch.no_grad()
+ def main(args, device):
+     hp = get_config_from_file(args.ar_config).hparams
+@@ -183,15 +405,24 @@ def main(args, device):
+                               num_workers=0,
+                               shuffle=False,
+                               sampler=None,
+-                              batch_size=1,
++                              batch_size=args.batch_size,
+                               collate_fn=testset.collate_fn,
+                               )
+-    
++
++    models = (ar_model, nar_model, encodec, vocos)
+     for i, loaded_data in enumerate(test_loader):
+         text_ids, text_id_lens, seqs, seq_lens, full_seqs, segment_ids, cond_acoustics, basenames = to_device(loaded_data, device=device)
++        at_prompt_len = cond_acoustics.shape[-1]
++
++        # Fast path: cross-sample batched generation when there is no acoustic prompt.
++        if at_prompt_len == 0:
++            generate_batched(args, hp, models, device,
++                             text_ids, text_id_lens, seqs, segment_ids, cond_acoustics, basenames)
++            continue
++
++        # Fallback (reference-audio prompt present): original per-sample path (requires batch_size == 1).
+         text_attn_mask = sequence_mask(text_id_lens, max_len=hp.max_text_len, device=device)
+         text_free_mask = torch.zeros_like(text_attn_mask, device=device)
+-        at_prompt_len = cond_acoustics.shape[-1]
+         
+         ##### AR inference
+         pred_st_flag = True
+@@ -430,6 +661,11 @@ if __name__ == "__main__":
+                         type=int,
+                         default=1,
+                         help='iterative decoding steps in NAR stage')                
++    parser.add_argument('--batch_size',
++                        type=int,
++                        default=1,
++                        help='number of samples generated together (cross-sample batching, '
++                             'only used when there is no reference-audio prompt)')
+     args = parser.parse_args()
+ 
+     assert 'cpu' in args.device or 'cuda' in args.device, "device must be \"cpu\" or \"cuda\""
+diff --git a/model/ar.py b/model/ar.py
+index be9b12d..0ca84d5 100644
+--- a/model/ar.py
++++ b/model/ar.py
+@@ -39,7 +39,7 @@ class VoxInstructAR(nn.Module):
+             bos_token_id=hp.bos_id,
+             eos_token_id=hp.eos_id,
+             attention_dropout=hp.attn_dropout_p,
+-            _attn_implementation="flash_attention_2"
++            _attn_implementation="sdpa"
+         )
+         self.model = LlamaForCausalLM(config=lm_config)
+ 
+diff --git a/model/nar.py b/model/nar.py
+index a7cc53c..276f1f2 100644
+--- a/model/nar.py
++++ b/model/nar.py
+@@ -39,7 +39,7 @@ class VoxInstructNAR(nn.Module):
+             bos_token_id=hp.bos_id,
+             eos_token_id=hp.eos_id,
+             attention_dropout=hp.attn_dropout_p,
+-            _attn_implementation="flash_attention_2"
++            _attn_implementation="sdpa"
+         )
+         self.model = LlamaModel(config=lm_config)
+         # Non-causal for NAR model
+@@ -247,4 +247,82 @@ class VoxInstructNAR(nn.Module):
+             num_to_mask_pre += num_to_mask_step
+ 
+         return x
++
++    def predict_batched(self, x, valid_lens, segment_ids, audio_attn_mask,
++                        text_ids=None, text_attn_mask=None, layer_index=1, iter_step=1):
++        '''
++        Batched counterpart of `predict`. Refines residual layer `layer_index`
++        for a whole padded batch in one transformer forward per iteration.
++
++        x:               [B, n_codebook, t]  (long) padded acoustic/semantic codes
++        valid_lens:      [B]                 real length (st_len + at_len) per sample
++        segment_ids:     [B, t]              1=ST, 2=AT, 0=pad
++        audio_attn_mask: [B, t]              1 for valid positions, 0 for pad
++        layer_index:     int (same residual layer for the whole batch)
++
++        Only the confidence-based selection/scatter is done per-sample (cheap,
++        no transformer); the expensive forward is fully batched.
++        '''
++        batch_size, n_codebook, t = x.size()
++        assert n_codebook == self.hp.at_res_num, f"n_codebook: {n_codebook} != {self.hp.at_res_num}"
++        device = x.device
++        li = int(layer_index)
++        layer_index_t = torch.full((batch_size,), li, dtype=torch.long, device=device)
++
++        # text embeddings (batched)
++        t5_outputs = self.t5_model(input_ids=text_ids, attention_mask=text_attn_mask)
++        text_encode = self.prompt_fc(t5_outputs.last_hidden_state)
++        text_encode = torch.where(
++            (text_attn_mask > 0).unsqueeze(-1),
++            text_encode,
++            torch.zeros_like(text_encode, device=device),
++        )
++
++        st_lens = (segment_ids == 1).sum(dim=1)  # [B]
++        pos = torch.arange(t, device=device).unsqueeze(0)  # [1, t]
++        # positions to predict: AT region within the valid length
++        mask_to_predict = (st_lens.unsqueeze(1) <= pos) & (pos < valid_lens.unsqueeze(1))  # [B, t] bool
++        num_to_mask = mask_to_predict.sum(dim=1).float()  # [B]
++        num_to_mask_pre = torch.zeros(batch_size, device=device)  # [B]
++
++        extend_segment_ids = torch.cat(
++            [torch.zeros_like(text_ids, device=device), segment_ids], dim=1)
++        extend_attention_mask = torch.cat(
++            [text_attn_mask, audio_attn_mask], dim=1)
++
++        for k in range(iter_step):
++            frac = 1 - math.cos(math.pi / 2 * (k + 1) / iter_step)
++            num_to_mask_step = torch.ceil(
++                num_to_mask * frac - num_to_mask_pre).clamp(min=0).long()  # [B]
++
++            inputs_embeds = self.embed_res(layer_index_t - 1).unsqueeze(1)
++            for i in range(n_codebook):
++                inputs_embeds = self.all_embed_tokens[i](x[:, i, :]) + inputs_embeds
++
++            extend_inputs_embeds = torch.cat([text_encode, inputs_embeds], dim=1)
++            extend_inputs_embeds += self.embed_segments(extend_segment_ids)
++
++            hidden_outputs = self.model(
++                inputs_embeds=extend_inputs_embeds,
++                attention_mask=extend_attention_mask,
++            ).last_hidden_state[:, self.hp.max_text_len:, :]
++
++            logits = self.out_proj[li - 1](hidden_outputs)  # [B, t, vocab]
++
++            logits_confid = F.softmax(logits, dim=-1).max(dim=-1).values.detach()
++            pred_logits_confidence = logits_confid * mask_to_predict.float()
++            _, inds = torch.sort(pred_logits_confidence, dim=1, descending=True)  # [B, t]
++            pred_toks = logits.argmax(dim=-1) + self.hp.st_token_num + self.hp.lang_num + 1
++
++            for b in range(batch_size):
++                kstep = int(num_to_mask_step[b])
++                if kstep <= 0:
++                    continue
++                sel = inds[b, :kstep]  # top-confidence still-masked positions
++                x[b, li, sel] = pred_toks[b, sel]
++                mask_to_predict[b, sel] = False
++
++            num_to_mask_pre += num_to_mask_step.float()
++
++        return x
+     

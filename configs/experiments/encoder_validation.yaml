@@ -1,0 +1,8 @@
+# Paper §3.2 and Appendix A
+corpus: LibriSpeech train-clean-100   # paper §3.2 (251 speakers)
+k: [6, 8, 10, 12, 15, 20, 24, 30, 40, 48, 60, 80, 120, 240]
+subset_size: 240
+subsets_per_k: 100
+metrics: [mpcd, vendi, chamfer, mmd]
+reference_pool: one_per_speaker   # R for Chamfer and MMD: one utterance of each of the 251 speakers, never in a subset
+seed: 0

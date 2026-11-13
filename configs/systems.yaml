@@ -1,0 +1,69 @@
+# The 7 ITTS systems in the paper: model weights, upstream code, conda environment and the
+# generation settings used for all of their audio. The sampling sweep (configs/experiments/
+# sampling_sweep.yaml) varies one parameter per system; everything else stays as below.
+systems:
+  - code_name: moss-voicegen
+    split_name: moss_voicegen
+    paper_name: MOSS-VoiceGenerator
+    hf_id: "OpenMOSS-Team/MOSS-VoiceGenerator"
+    revision: 97521ec2b6f3ec5026ac1f5751f8fc302d82c2d4
+    codec: {hf_id: "OpenMOSS-Team/MOSS-Audio-Tokenizer", revision: 3cd226ba2947efa357ef453bcad111b6eafba782}
+    env: itts_moss
+    upstream_repo: "https://github.com/OpenMOSS/MOSS-TTS"
+    upstream_commit: ad99ec5f26debf1d6c1a4dc8461b2bcb787ec9af
+    decoding: "BF16 weights, audio temperature 1.5 (swept 0.5-2.5 in §4.2)"
+  - code_name: parler-large
+    split_name: parler_large
+    paper_name: Parler-TTS Large v1
+    hf_id: "parler-tts/parler-tts-large-v1"
+    revision: adcffcde0015cbeee553136a34f5b8c01aa54bcb
+    env: itts_parler
+    decoding: "library defaults (no generation arguments passed); torch.compile off"
+  - code_name: parler-mini
+    split_name: parler_mini
+    paper_name: Parler-TTS Mini v1
+    hf_id: "parler-tts/parler-tts-mini-v1"
+    revision: 0392b9451a601e528fd863bbb0598431fee810d9
+    env: itts_parler
+    decoding: "library defaults (no generation arguments passed); torch.compile off"
+  - code_name: capspeech
+    split_name: capspeech_nar
+    paper_name: CapSpeech-NAR
+    hf_id: "OpenSound/CapSpeech-models"
+    revision: e3a063aa24fbd16a1bf0c6cacb89cec043095fe8
+    env: itts_capspeech
+    upstream_repo: "https://github.com/WangHelin1997/CapSpeech"
+    upstream_commit: 0868f3578ba61e50ceddf4ac7b05c286c008652a
+    checkpoint_per_category: {overall: CapTTS, age: CapTTS, gender: CapTTS, gender_x_age: CapTTS, accent: AccCapTTS, emotion: EmoCapTTS}
+    decoding: "25 steps, CFG 2.0"
+  - code_name: qwen3-voicedesign
+    split_name: qwen3_tts
+    paper_name: Qwen3-TTS Voice Design 1.7B
+    hf_id: "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign"
+    revision: 5ecdb67327fd37bb2e042aab12ff7391903235d3
+    env: itts_qwen
+    decoding: "library defaults (no generation arguments passed)"
+  - code_name: voxinstruct
+    split_name: voxinstruct
+    paper_name: VoxInstruct
+    hf_id: null
+    weights: "Google Drive (see generation/README.md)"
+    env: itts_vox
+    upstream_repo: "https://github.com/thuhcsi/VoxInstruct"
+    upstream_commit: e953295485bd88a293b37735c98b362554f4635b
+    decoding: "CFG st/text, at/text, at/st = 1, 1, 1; 1 NAR step (cfg_st_on_text swept 0.5-2.5 in §4.2)"
+  - code_name: voxcpm2
+    split_name: voxcpm2
+    paper_name: VoxCPM2
+    hf_id: "openbmb/VoxCPM2"
+    revision: bffb3df5a29440629464e5e839f4d214c8714c3d
+    env: itts_voxcpm2
+    upstream_repo: "https://github.com/OpenBMB/VoxCPM"
+    upstream_commit: 616d3d3e630a9c96c2853250eef91b0f39dcd5fa
+    decoding: "CFG 2.0 (swept 0.5-2.5 in §4.2), 10 inference timesteps"
+
+# Supporting checkpoints loaded by the systems above.
+auxiliary_checkpoints:
+  - {code_name: moss-audio-tokenizer, hf_id: "OpenMOSS-Team/MOSS-Audio-Tokenizer", revision: 3cd226ba2947efa357ef453bcad111b6eafba782}
+  - {code_name: capspeech-vocoder, hf_id: "nvidia/bigvgan_v2_24khz_100band_256x", revision: c329ede9e9bbc100ddf5c91e2330a61921262370}
+  - {code_name: capspeech-caption-encoder, hf_id: "google/flan-t5-large", revision: 0613663d0d48ea86ba8cb3d7a44f0f65dc596a2a}

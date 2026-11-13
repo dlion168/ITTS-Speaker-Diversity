@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "dataset": {
+    "repo_id": "dlion168/itts-speaker-diversity",
+    "revision": "6fbfb3a69abdc4543a4989809bf085661ab836f4",
+    "gated": "auto"
+  },
+  "accent_classifiers": {
+    "repo_id": "Snooow1029/itts-attribute-classifiers",
+    "revision": "b1aa27e8b5bd9674541fa7b64187d0e26b4ccd71"
+  }
+}

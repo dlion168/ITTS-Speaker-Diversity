@@ -1,0 +1,1994 @@
+{
+  "capspeech/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.5451,
+        "uar": 0.5451,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.9977,
+          "germanic": 0.0087,
+          "north_american": 0.994,
+          "oceanian": 0.4373,
+          "south_african": 0.0403,
+          "south_asian": 0.7923
+        },
+        "confusion": {
+          "british_isles": {
+            "british_isles": 2993,
+            "oceanian": 3,
+            "north_american": 2,
+            "germanic": 2
+          },
+          "germanic": {
+            "british_isles": 1915,
+            "oceanian": 236,
+            "north_american": 792,
+            "south_african": 31,
+            "germanic": 26
+          },
+          "north_american": {
+            "north_american": 2982,
+            "oceanian": 12,
+            "british_isles": 5,
+            "south_african": 1
+          },
+          "oceanian": {
+            "british_isles": 1383,
+            "oceanian": 1312,
+            "north_american": 286,
+            "south_african": 19
+          },
+          "south_african": {
+            "british_isles": 1316,
+            "oceanian": 1502,
+            "south_african": 121,
+            "germanic": 21,
+            "north_american": 40
+          },
+          "south_asian": {
+            "south_asian": 2377,
+            "south_african": 584,
+            "oceanian": 4,
+            "north_american": 26,
+            "germanic": 3,
+            "british_isles": 6
+          }
+        }
+      }
+    }
+  },
+  "capspeech/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.318,
+        "uar": 0.318,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.346,
+          "elderly": 0.1273,
+          "middle_aged": 0.214,
+          "young_adult": 0.5847
+        },
+        "confusion": {
+          "child": {
+            "child": 1038,
+            "young_adult": 1905,
+            "middle_aged": 52,
+            "elderly": 5
+          },
+          "elderly": {
+            "middle_aged": 750,
+            "young_adult": 1688,
+            "elderly": 382,
+            "child": 180
+          },
+          "middle_aged": {
+            "middle_aged": 642,
+            "young_adult": 1803,
+            "child": 260,
+            "elderly": 295
+          },
+          "young_adult": {
+            "child": 1220,
+            "young_adult": 1754,
+            "middle_aged": 24,
+            "elderly": 2
+          }
+        }
+      }
+    }
+  },
+  "capspeech/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.4343,
+        "uar": 0.4343,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.7043,
+          "happy": 0.1283,
+          "neutral": 0.7973,
+          "sad": 0.1073
+        },
+        "confusion": {
+          "angry": {
+            "angry": 2113,
+            "neutral": 676,
+            "happy": 209,
+            "sad": 2
+          },
+          "happy": {
+            "angry": 1389,
+            "neutral": 1216,
+            "happy": 385,
+            "sad": 10
+          },
+          "neutral": {
+            "neutral": 2392,
+            "angry": 279,
+            "happy": 205,
+            "sad": 124
+          },
+          "sad": {
+            "neutral": 2294,
+            "angry": 181,
+            "sad": 322,
+            "happy": 203
+          }
+        }
+      }
+    }
+  },
+  "capspeech/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.9407,
+        "uar": 0.9407,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.8813,
+          "male": 1.0
+        },
+        "confusion": {
+          "female": {
+            "female": 2644,
+            "male": 356
+          },
+          "male": {
+            "male": 3000
+          }
+        }
+      }
+    }
+  },
+  "capspeech/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.3666,
+        "uar": 0.3666,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.2365,
+          "elderly": 0.2416,
+          "middle_aged": 0.2915,
+          "young_adult": 0.6968
+        },
+        "confusion": {
+          "child": {
+            "child": 2838,
+            "young_adult": 9002,
+            "middle_aged": 154,
+            "elderly": 6
+          },
+          "elderly": {
+            "middle_aged": 4083,
+            "young_adult": 4857,
+            "child": 161,
+            "elderly": 2899
+          },
+          "middle_aged": {
+            "young_adult": 6430,
+            "middle_aged": 3498,
+            "elderly": 1592,
+            "child": 480
+          },
+          "young_adult": {
+            "child": 3631,
+            "young_adult": 8362,
+            "middle_aged": 7
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.9222,
+        "uar": 0.9222,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.8444,
+          "male": 1.0
+        },
+        "confusion": {
+          "female": {
+            "female": 20265,
+            "male": 3735
+          },
+          "male": {
+            "male": 24000
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.398,
+        "gender_acc": 0.8598,
+        "both_acc": 0.3372
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.141,
+        "gender_acc": 0.8958,
+        "both_acc": 0.1383
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.2858,
+        "gender_acc": 0.77,
+        "both_acc": 0.2697
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.5613,
+        "gender_acc": 0.8518,
+        "both_acc": 0.4762
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.075,
+        "gender_acc": 1.0,
+        "both_acc": 0.075
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.3422,
+        "gender_acc": 1.0,
+        "both_acc": 0.3422
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.2972,
+        "gender_acc": 1.0,
+        "both_acc": 0.2972
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.8323,
+        "gender_acc": 1.0,
+        "both_acc": 0.8323
+      }
+    }
+  },
+  "moss-voicegen/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.599,
+        "uar": 0.599,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.824,
+          "germanic": 0.4177,
+          "north_american": 0.9093,
+          "oceanian": 0.58,
+          "south_african": 0.6923,
+          "south_asian": 0.1707
+        },
+        "confusion": {
+          "british_isles": {
+            "north_american": 154,
+            "british_isles": 2472,
+            "oceanian": 239,
+            "germanic": 90,
+            "south_african": 43,
+            "south_asian": 2
+          },
+          "germanic": {
+            "germanic": 1253,
+            "south_african": 648,
+            "north_american": 666,
+            "british_isles": 380,
+            "oceanian": 49,
+            "south_asian": 4
+          },
+          "north_american": {
+            "north_american": 2728,
+            "germanic": 77,
+            "british_isles": 85,
+            "south_african": 57,
+            "oceanian": 43,
+            "south_asian": 10
+          },
+          "oceanian": {
+            "north_american": 952,
+            "oceanian": 1740,
+            "germanic": 59,
+            "south_african": 106,
+            "british_isles": 140,
+            "south_asian": 3
+          },
+          "south_african": {
+            "oceanian": 670,
+            "british_isles": 142,
+            "south_african": 2077,
+            "germanic": 65,
+            "north_american": 42,
+            "south_asian": 4
+          },
+          "south_asian": {
+            "north_american": 985,
+            "british_isles": 142,
+            "south_african": 1017,
+            "south_asian": 512,
+            "germanic": 310,
+            "oceanian": 34
+          }
+        }
+      }
+    }
+  },
+  "moss-voicegen/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.532,
+        "uar": 0.532,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.4447,
+          "elderly": 0.4347,
+          "middle_aged": 0.5043,
+          "young_adult": 0.7443
+        },
+        "confusion": {
+          "child": {
+            "child": 1334,
+            "young_adult": 1590,
+            "middle_aged": 64,
+            "elderly": 12
+          },
+          "elderly": {
+            "young_adult": 546,
+            "middle_aged": 1133,
+            "elderly": 1304,
+            "child": 17
+          },
+          "middle_aged": {
+            "young_adult": 955,
+            "middle_aged": 1513,
+            "elderly": 513,
+            "child": 19
+          },
+          "young_adult": {
+            "child": 160,
+            "young_adult": 2233,
+            "middle_aged": 510,
+            "elderly": 97
+          }
+        }
+      }
+    }
+  },
+  "moss-voicegen/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.3575,
+        "uar": 0.3575,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.212,
+          "happy": 0.2603,
+          "neutral": 0.7673,
+          "sad": 0.1903
+        },
+        "confusion": {
+          "angry": {
+            "neutral": 1665,
+            "angry": 636,
+            "happy": 615,
+            "sad": 84
+          },
+          "happy": {
+            "happy": 781,
+            "neutral": 1967,
+            "sad": 130,
+            "angry": 122
+          },
+          "neutral": {
+            "neutral": 2302,
+            "happy": 374,
+            "sad": 278,
+            "angry": 46
+          },
+          "sad": {
+            "neutral": 1973,
+            "sad": 571,
+            "happy": 403,
+            "angry": 53
+          }
+        }
+      }
+    }
+  },
+  "moss-voicegen/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.9623,
+        "uar": 0.9623,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.975,
+          "male": 0.9497
+        },
+        "confusion": {
+          "female": {
+            "female": 2925,
+            "male": 75
+          },
+          "male": {
+            "male": 2849,
+            "female": 151
+          }
+        }
+      }
+    }
+  },
+  "moss-voicegen/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.5162,
+        "uar": 0.5162,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.3855,
+          "elderly": 0.4128,
+          "middle_aged": 0.4682,
+          "young_adult": 0.7983
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 6472,
+            "child": 4626,
+            "middle_aged": 771,
+            "elderly": 131
+          },
+          "elderly": {
+            "middle_aged": 4967,
+            "elderly": 4954,
+            "young_adult": 2046,
+            "child": 33
+          },
+          "middle_aged": {
+            "young_adult": 4409,
+            "middle_aged": 5618,
+            "elderly": 1882,
+            "child": 91
+          },
+          "young_adult": {
+            "young_adult": 9580,
+            "child": 818,
+            "elderly": 142,
+            "middle_aged": 1460
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.8912,
+        "uar": 0.8912,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9841,
+          "male": 0.7983
+        },
+        "confusion": {
+          "female": {
+            "female": 23619,
+            "male": 381
+          },
+          "male": {
+            "female": 4841,
+            "male": 19159
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.4305,
+        "gender_acc": 0.9793,
+        "both_acc": 0.4118
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.3027,
+        "gender_acc": 0.9825,
+        "both_acc": 0.2943
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.406,
+        "gender_acc": 0.9798,
+        "both_acc": 0.3993
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.8815,
+        "gender_acc": 0.9948,
+        "both_acc": 0.8788
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.3405,
+        "gender_acc": 0.2727,
+        "both_acc": 0.0375
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.523,
+        "gender_acc": 0.9703,
+        "both_acc": 0.5073
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.5303,
+        "gender_acc": 0.99,
+        "both_acc": 0.5265
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.7152,
+        "gender_acc": 0.9602,
+        "both_acc": 0.699
+      }
+    }
+  },
+  "parler-large/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.1708,
+        "uar": 0.1708,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.163,
+          "germanic": 0.001,
+          "north_american": 0.7567,
+          "oceanian": 0.0417,
+          "south_african": 0.057,
+          "south_asian": 0.0057
+        },
+        "confusion": {
+          "british_isles": {
+            "british_isles": 489,
+            "south_african": 157,
+            "north_american": 2204,
+            "oceanian": 136,
+            "south_asian": 12,
+            "germanic": 2
+          },
+          "germanic": {
+            "north_american": 2260,
+            "oceanian": 116,
+            "british_isles": 488,
+            "south_african": 127,
+            "south_asian": 6,
+            "germanic": 3
+          },
+          "north_american": {
+            "north_american": 2270,
+            "oceanian": 145,
+            "british_isles": 419,
+            "south_african": 148,
+            "germanic": 5,
+            "south_asian": 13
+          },
+          "oceanian": {
+            "british_isles": 368,
+            "north_american": 2361,
+            "south_african": 134,
+            "south_asian": 9,
+            "oceanian": 125,
+            "germanic": 3
+          },
+          "south_african": {
+            "british_isles": 421,
+            "north_american": 2286,
+            "south_african": 171,
+            "oceanian": 106,
+            "germanic": 7,
+            "south_asian": 9
+          },
+          "south_asian": {
+            "north_american": 2239,
+            "south_african": 179,
+            "british_isles": 432,
+            "oceanian": 124,
+            "south_asian": 17,
+            "germanic": 9
+          }
+        }
+      }
+    }
+  },
+  "parler-large/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.2692,
+        "uar": 0.2692,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.0237,
+          "elderly": 0.2327,
+          "middle_aged": 0.3767,
+          "young_adult": 0.444
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 1255,
+            "elderly": 619,
+            "middle_aged": 1055,
+            "child": 71
+          },
+          "elderly": {
+            "young_adult": 1115,
+            "middle_aged": 1142,
+            "elderly": 698,
+            "child": 45
+          },
+          "middle_aged": {
+            "young_adult": 940,
+            "middle_aged": 1130,
+            "elderly": 879,
+            "child": 51
+          },
+          "young_adult": {
+            "middle_aged": 1042,
+            "young_adult": 1332,
+            "elderly": 570,
+            "child": 56
+          }
+        }
+      }
+    }
+  },
+  "parler-large/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.2702,
+        "uar": 0.2702,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.0333,
+          "happy": 0.2413,
+          "neutral": 0.379,
+          "sad": 0.427
+        },
+        "confusion": {
+          "angry": {
+            "neutral": 899,
+            "happy": 822,
+            "sad": 1179,
+            "angry": 100
+          },
+          "happy": {
+            "sad": 1125,
+            "neutral": 1056,
+            "happy": 724,
+            "angry": 95
+          },
+          "neutral": {
+            "neutral": 1137,
+            "happy": 626,
+            "sad": 1147,
+            "angry": 90
+          },
+          "sad": {
+            "sad": 1281,
+            "neutral": 953,
+            "happy": 672,
+            "angry": 94
+          }
+        }
+      }
+    }
+  },
+  "parler-large/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.9745,
+        "uar": 0.9745,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.9647,
+          "male": 0.9843
+        },
+        "confusion": {
+          "female": {
+            "female": 2894,
+            "male": 106
+          },
+          "male": {
+            "male": 2953,
+            "female": 47
+          }
+        }
+      }
+    }
+  },
+  "parler-large/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.2561,
+        "uar": 0.2561,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.0195,
+          "elderly": 0.2653,
+          "middle_aged": 0.3267,
+          "young_adult": 0.4127
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 4833,
+            "middle_aged": 4021,
+            "elderly": 2912,
+            "child": 234
+          },
+          "elderly": {
+            "middle_aged": 3973,
+            "elderly": 3184,
+            "young_adult": 4668,
+            "child": 175
+          },
+          "middle_aged": {
+            "young_adult": 4743,
+            "middle_aged": 3921,
+            "elderly": 3129,
+            "child": 207
+          },
+          "young_adult": {
+            "young_adult": 4952,
+            "elderly": 2811,
+            "middle_aged": 4012,
+            "child": 225
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.975,
+        "uar": 0.975,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9673,
+          "male": 0.9827
+        },
+        "confusion": {
+          "female": {
+            "female": 23215,
+            "male": 785
+          },
+          "male": {
+            "male": 23585,
+            "female": 415
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.0203,
+        "gender_acc": 0.9682,
+        "both_acc": 0.0197
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.1273,
+        "gender_acc": 0.9662,
+        "both_acc": 0.1157
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.2975,
+        "gender_acc": 0.969,
+        "both_acc": 0.2893
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.5722,
+        "gender_acc": 0.9658,
+        "both_acc": 0.5585
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.0187,
+        "gender_acc": 0.982,
+        "both_acc": 0.0187
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.4033,
+        "gender_acc": 0.9805,
+        "both_acc": 0.399
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.356,
+        "gender_acc": 0.989,
+        "both_acc": 0.3517
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.2532,
+        "gender_acc": 0.9793,
+        "both_acc": 0.2468
+      }
+    }
+  },
+  "parler-mini/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.1727,
+        "uar": 0.1727,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.1817,
+          "germanic": 0.001,
+          "north_american": 0.7437,
+          "oceanian": 0.053,
+          "south_african": 0.054,
+          "south_asian": 0.0027
+        },
+        "confusion": {
+          "british_isles": {
+            "north_american": 2104,
+            "british_isles": 545,
+            "south_african": 142,
+            "oceanian": 200,
+            "germanic": 1,
+            "south_asian": 8
+          },
+          "germanic": {
+            "north_american": 2111,
+            "south_african": 164,
+            "british_isles": 523,
+            "oceanian": 192,
+            "south_asian": 7,
+            "germanic": 3
+          },
+          "north_american": {
+            "north_american": 2231,
+            "oceanian": 176,
+            "british_isles": 462,
+            "south_african": 122,
+            "south_asian": 7,
+            "germanic": 2
+          },
+          "oceanian": {
+            "north_american": 2165,
+            "british_isles": 516,
+            "oceanian": 159,
+            "south_african": 146,
+            "south_asian": 9,
+            "germanic": 5
+          },
+          "south_african": {
+            "north_american": 2109,
+            "british_isles": 532,
+            "oceanian": 189,
+            "south_african": 162,
+            "south_asian": 4,
+            "germanic": 4
+          },
+          "south_asian": {
+            "north_american": 2154,
+            "british_isles": 533,
+            "south_african": 139,
+            "oceanian": 161,
+            "germanic": 5,
+            "south_asian": 8
+          }
+        }
+      }
+    }
+  },
+  "parler-mini/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.2569,
+        "uar": 0.2569,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.0133,
+          "elderly": 0.2517,
+          "middle_aged": 0.418,
+          "young_adult": 0.3447
+        },
+        "confusion": {
+          "child": {
+            "middle_aged": 1269,
+            "young_adult": 1032,
+            "elderly": 659,
+            "child": 40
+          },
+          "elderly": {
+            "young_adult": 946,
+            "middle_aged": 1270,
+            "elderly": 755,
+            "child": 29
+          },
+          "middle_aged": {
+            "middle_aged": 1254,
+            "young_adult": 959,
+            "elderly": 747,
+            "child": 40
+          },
+          "young_adult": {
+            "middle_aged": 1275,
+            "elderly": 644,
+            "young_adult": 1034,
+            "child": 47
+          }
+        }
+      }
+    }
+  },
+  "parler-mini/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.2727,
+        "uar": 0.2727,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.0243,
+          "happy": 0.195,
+          "neutral": 0.334,
+          "sad": 0.5373
+        },
+        "confusion": {
+          "angry": {
+            "sad": 1604,
+            "neutral": 708,
+            "happy": 615,
+            "angry": 73
+          },
+          "happy": {
+            "neutral": 856,
+            "sad": 1501,
+            "happy": 585,
+            "angry": 58
+          },
+          "neutral": {
+            "happy": 534,
+            "neutral": 1002,
+            "sad": 1400,
+            "angry": 64
+          },
+          "sad": {
+            "neutral": 783,
+            "happy": 549,
+            "sad": 1612,
+            "angry": 56
+          }
+        }
+      }
+    }
+  },
+  "parler-mini/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.9618,
+        "uar": 0.9618,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.955,
+          "male": 0.9687
+        },
+        "confusion": {
+          "female": {
+            "female": 2865,
+            "male": 135
+          },
+          "male": {
+            "male": 2906,
+            "female": 94
+          }
+        }
+      }
+    }
+  },
+  "parler-mini/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.2571,
+        "uar": 0.2571,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.0139,
+          "elderly": 0.2405,
+          "middle_aged": 0.3692,
+          "young_adult": 0.4049
+        },
+        "confusion": {
+          "child": {
+            "middle_aged": 4664,
+            "young_adult": 4669,
+            "elderly": 2500,
+            "child": 167
+          },
+          "elderly": {
+            "middle_aged": 4574,
+            "young_adult": 4412,
+            "elderly": 2886,
+            "child": 128
+          },
+          "middle_aged": {
+            "young_adult": 4632,
+            "middle_aged": 4430,
+            "elderly": 2781,
+            "child": 157
+          },
+          "young_adult": {
+            "young_adult": 4859,
+            "middle_aged": 4517,
+            "elderly": 2445,
+            "child": 179
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.961,
+        "uar": 0.961,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9579,
+          "male": 0.964
+        },
+        "confusion": {
+          "female": {
+            "female": 22989,
+            "male": 1011
+          },
+          "male": {
+            "male": 23137,
+            "female": 863
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.0128,
+        "gender_acc": 0.9533,
+        "both_acc": 0.0112
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.1242,
+        "gender_acc": 0.9543,
+        "both_acc": 0.1133
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.3377,
+        "gender_acc": 0.9645,
+        "both_acc": 0.3252
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.5497,
+        "gender_acc": 0.9593,
+        "both_acc": 0.529
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.015,
+        "gender_acc": 0.9578,
+        "both_acc": 0.015
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.3568,
+        "gender_acc": 0.963,
+        "both_acc": 0.3493
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.4007,
+        "gender_acc": 0.9708,
+        "both_acc": 0.3853
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.2602,
+        "gender_acc": 0.9645,
+        "both_acc": 0.2482
+      }
+    }
+  },
+  "qwen3-voicedesign/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.1895,
+        "uar": 0.1895,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.1,
+          "germanic": 0.032,
+          "north_american": 0.986,
+          "oceanian": 0.0107,
+          "south_african": 0.008,
+          "south_asian": 0.0003
+        },
+        "confusion": {
+          "british_isles": {
+            "north_american": 2590,
+            "british_isles": 300,
+            "oceanian": 57,
+            "germanic": 37,
+            "south_african": 16
+          },
+          "germanic": {
+            "north_american": 2700,
+            "british_isles": 126,
+            "south_african": 43,
+            "germanic": 96,
+            "oceanian": 34,
+            "south_asian": 1
+          },
+          "north_american": {
+            "north_american": 2958,
+            "germanic": 13,
+            "british_isles": 16,
+            "south_african": 6,
+            "oceanian": 7
+          },
+          "oceanian": {
+            "north_american": 2808,
+            "germanic": 21,
+            "oceanian": 32,
+            "british_isles": 113,
+            "south_african": 26
+          },
+          "south_african": {
+            "north_american": 2765,
+            "south_asian": 1,
+            "british_isles": 156,
+            "germanic": 17,
+            "oceanian": 37,
+            "south_african": 24
+          },
+          "south_asian": {
+            "north_american": 2854,
+            "germanic": 18,
+            "british_isles": 75,
+            "south_african": 18,
+            "oceanian": 34,
+            "south_asian": 1
+          }
+        }
+      }
+    }
+  },
+  "qwen3-voicedesign/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.4873,
+        "uar": 0.4873,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.9007,
+          "elderly": 0.1437,
+          "middle_aged": 0.2833,
+          "young_adult": 0.6217
+        },
+        "confusion": {
+          "child": {
+            "child": 2702,
+            "young_adult": 293,
+            "middle_aged": 5
+          },
+          "elderly": {
+            "young_adult": 1491,
+            "middle_aged": 856,
+            "elderly": 431,
+            "child": 222
+          },
+          "middle_aged": {
+            "child": 365,
+            "elderly": 472,
+            "young_adult": 1313,
+            "middle_aged": 850
+          },
+          "young_adult": {
+            "young_adult": 1865,
+            "child": 1025,
+            "middle_aged": 106,
+            "elderly": 4
+          }
+        }
+      }
+    }
+  },
+  "qwen3-voicedesign/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.5591,
+        "uar": 0.5591,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.3363,
+          "happy": 0.6477,
+          "neutral": 0.715,
+          "sad": 0.5373
+        },
+        "confusion": {
+          "angry": {
+            "neutral": 1168,
+            "angry": 1009,
+            "happy": 780,
+            "sad": 43
+          },
+          "happy": {
+            "happy": 1943,
+            "neutral": 894,
+            "sad": 59,
+            "angry": 104
+          },
+          "neutral": {
+            "neutral": 2145,
+            "happy": 527,
+            "sad": 302,
+            "angry": 26
+          },
+          "sad": {
+            "neutral": 1073,
+            "sad": 1612,
+            "happy": 290,
+            "angry": 25
+          }
+        }
+      }
+    }
+  },
+  "qwen3-voicedesign/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.953,
+        "uar": 0.953,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.961,
+          "male": 0.945
+        },
+        "confusion": {
+          "female": {
+            "female": 2883,
+            "male": 117
+          },
+          "male": {
+            "male": 2835,
+            "female": 165
+          }
+        }
+      }
+    }
+  },
+  "qwen3-voicedesign/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.382,
+        "uar": 0.382,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.5636,
+          "elderly": 0.1704,
+          "middle_aged": 0.2576,
+          "young_adult": 0.5366
+        },
+        "confusion": {
+          "child": {
+            "child": 6763,
+            "young_adult": 3488,
+            "middle_aged": 1523,
+            "elderly": 226
+          },
+          "elderly": {
+            "young_adult": 5629,
+            "middle_aged": 3690,
+            "elderly": 2045,
+            "child": 636
+          },
+          "middle_aged": {
+            "young_adult": 6538,
+            "middle_aged": 3091,
+            "elderly": 1025,
+            "child": 1346
+          },
+          "young_adult": {
+            "young_adult": 6439,
+            "child": 4101,
+            "middle_aged": 1375,
+            "elderly": 85
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.8595,
+        "uar": 0.8595,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9364,
+          "male": 0.7827
+        },
+        "confusion": {
+          "female": {
+            "female": 22474,
+            "male": 1526
+          },
+          "male": {
+            "female": 5216,
+            "male": 18784
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.8353,
+        "gender_acc": 0.9848,
+        "both_acc": 0.8215
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.0537,
+        "gender_acc": 0.8763,
+        "both_acc": 0.0498
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.2442,
+        "gender_acc": 0.8937,
+        "both_acc": 0.2278
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.5775,
+        "gender_acc": 0.9908,
+        "both_acc": 0.573
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.2918,
+        "gender_acc": 0.374,
+        "both_acc": 0.1293
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.2872,
+        "gender_acc": 0.955,
+        "both_acc": 0.2838
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.271,
+        "gender_acc": 0.9605,
+        "both_acc": 0.2588
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.4957,
+        "gender_acc": 0.8412,
+        "both_acc": 0.4585
+      }
+    }
+  },
+  "voxcpm2/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.381,
+        "uar": 0.381,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.607,
+          "germanic": 0.014,
+          "north_american": 0.9857,
+          "oceanian": 0.0363,
+          "south_african": 0.4193,
+          "south_asian": 0.2237
+        },
+        "confusion": {
+          "british_isles": {
+            "north_american": 908,
+            "british_isles": 1821,
+            "oceanian": 222,
+            "south_african": 32,
+            "germanic": 15,
+            "south_asian": 2
+          },
+          "germanic": {
+            "british_isles": 601,
+            "north_american": 2075,
+            "oceanian": 137,
+            "south_african": 141,
+            "germanic": 42,
+            "south_asian": 4
+          },
+          "north_american": {
+            "north_american": 2957,
+            "british_isles": 24,
+            "oceanian": 15,
+            "south_african": 2,
+            "germanic": 2
+          },
+          "oceanian": {
+            "north_american": 2102,
+            "british_isles": 575,
+            "oceanian": 109,
+            "south_african": 172,
+            "germanic": 33,
+            "south_asian": 9
+          },
+          "south_african": {
+            "british_isles": 294,
+            "north_american": 833,
+            "south_african": 1258,
+            "oceanian": 573,
+            "germanic": 37,
+            "south_asian": 5
+          },
+          "south_asian": {
+            "south_asian": 671,
+            "north_american": 1012,
+            "south_african": 1135,
+            "oceanian": 81,
+            "british_isles": 69,
+            "germanic": 32
+          }
+        }
+      }
+    }
+  },
+  "voxcpm2/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.388,
+        "uar": 0.388,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.5497,
+          "elderly": 0.275,
+          "middle_aged": 0.4213,
+          "young_adult": 0.306
+        },
+        "confusion": {
+          "child": {
+            "child": 1649,
+            "middle_aged": 309,
+            "young_adult": 1004,
+            "elderly": 38
+          },
+          "elderly": {
+            "young_adult": 714,
+            "elderly": 825,
+            "middle_aged": 1377,
+            "child": 84
+          },
+          "middle_aged": {
+            "elderly": 725,
+            "middle_aged": 1264,
+            "young_adult": 849,
+            "child": 162
+          },
+          "young_adult": {
+            "young_adult": 918,
+            "middle_aged": 1427,
+            "child": 150,
+            "elderly": 505
+          }
+        }
+      }
+    }
+  },
+  "voxcpm2/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.2965,
+        "uar": 0.2965,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.1637,
+          "happy": 0.1977,
+          "neutral": 0.759,
+          "sad": 0.0657
+        },
+        "confusion": {
+          "angry": {
+            "neutral": 2003,
+            "happy": 471,
+            "angry": 491,
+            "sad": 35
+          },
+          "happy": {
+            "neutral": 2024,
+            "angry": 338,
+            "happy": 593,
+            "sad": 45
+          },
+          "neutral": {
+            "neutral": 2277,
+            "happy": 468,
+            "angry": 153,
+            "sad": 102
+          },
+          "sad": {
+            "neutral": 2233,
+            "happy": 439,
+            "sad": 197,
+            "angry": 131
+          }
+        }
+      }
+    }
+  },
+  "voxcpm2/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.9715,
+        "uar": 0.9715,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.984,
+          "male": 0.959
+        },
+        "confusion": {
+          "female": {
+            "female": 2952,
+            "male": 48
+          },
+          "male": {
+            "male": 2877,
+            "female": 123
+          }
+        }
+      }
+    }
+  },
+  "voxcpm2/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.4324,
+        "uar": 0.4324,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.3596,
+          "elderly": 0.4539,
+          "middle_aged": 0.4158,
+          "young_adult": 0.5003
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 5218,
+            "child": 4315,
+            "middle_aged": 1892,
+            "elderly": 575
+          },
+          "elderly": {
+            "elderly": 5447,
+            "middle_aged": 3931,
+            "young_adult": 2302,
+            "child": 320
+          },
+          "middle_aged": {
+            "elderly": 3025,
+            "middle_aged": 4990,
+            "young_adult": 3451,
+            "child": 534
+          },
+          "young_adult": {
+            "middle_aged": 3009,
+            "elderly": 840,
+            "young_adult": 6004,
+            "child": 2147
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.915,
+        "uar": 0.915,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9232,
+          "male": 0.9069
+        },
+        "confusion": {
+          "female": {
+            "female": 22157,
+            "male": 1843
+          },
+          "male": {
+            "male": 21765,
+            "female": 2235
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.4923,
+        "gender_acc": 0.8843,
+        "both_acc": 0.3853
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.3275,
+        "gender_acc": 0.8935,
+        "both_acc": 0.2962
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.4828,
+        "gender_acc": 0.9463,
+        "both_acc": 0.473
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.562,
+        "gender_acc": 0.9687,
+        "both_acc": 0.547
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.2268,
+        "gender_acc": 0.679,
+        "both_acc": 0.1555
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.5803,
+        "gender_acc": 0.9898,
+        "both_acc": 0.5753
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.3488,
+        "gender_acc": 0.9895,
+        "both_acc": 0.3453
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.4387,
+        "gender_acc": 0.9692,
+        "both_acc": 0.4308
+      }
+    }
+  },
+  "voxinstruct/accent": {
+    "n_rows": 18000,
+    "attributes": {
+      "accent": {
+        "controllability_acc": 0.1689,
+        "uar": 0.1689,
+        "n": 18000,
+        "per_class_recall": {
+          "british_isles": 0.0853,
+          "germanic": 0.0007,
+          "north_american": 0.887,
+          "oceanian": 0.0237,
+          "south_african": 0.016,
+          "south_asian": 0.0007
+        },
+        "confusion": {
+          "british_isles": {
+            "north_american": 2620,
+            "british_isles": 256,
+            "oceanian": 81,
+            "south_african": 39,
+            "germanic": 3,
+            "south_asian": 1
+          },
+          "germanic": {
+            "north_american": 2644,
+            "british_isles": 226,
+            "oceanian": 78,
+            "south_african": 49,
+            "germanic": 2,
+            "south_asian": 1
+          },
+          "north_american": {
+            "north_american": 2661,
+            "oceanian": 94,
+            "british_isles": 203,
+            "germanic": 4,
+            "south_african": 38
+          },
+          "oceanian": {
+            "north_american": 2658,
+            "british_isles": 223,
+            "oceanian": 71,
+            "south_african": 43,
+            "germanic": 3,
+            "south_asian": 2
+          },
+          "south_african": {
+            "north_american": 2640,
+            "british_isles": 219,
+            "oceanian": 85,
+            "germanic": 4,
+            "south_asian": 4,
+            "south_african": 48
+          },
+          "south_asian": {
+            "north_american": 2612,
+            "south_african": 66,
+            "british_isles": 220,
+            "oceanian": 99,
+            "south_asian": 2,
+            "germanic": 1
+          }
+        }
+      }
+    }
+  },
+  "voxinstruct/age": {
+    "n_rows": 12000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.3494,
+        "uar": 0.3494,
+        "n": 12000,
+        "per_class_recall": {
+          "child": 0.058,
+          "elderly": 0.2103,
+          "middle_aged": 0.367,
+          "young_adult": 0.7623
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 2623,
+            "middle_aged": 193,
+            "child": 174,
+            "elderly": 10
+          },
+          "elderly": {
+            "middle_aged": 1415,
+            "elderly": 631,
+            "young_adult": 911,
+            "child": 43
+          },
+          "middle_aged": {
+            "young_adult": 1700,
+            "elderly": 120,
+            "middle_aged": 1101,
+            "child": 79
+          },
+          "young_adult": {
+            "young_adult": 2287,
+            "child": 242,
+            "middle_aged": 438,
+            "elderly": 33
+          }
+        }
+      }
+    }
+  },
+  "voxinstruct/emotion": {
+    "n_rows": 12000,
+    "attributes": {
+      "emotion": {
+        "controllability_acc": 0.2945,
+        "uar": 0.2945,
+        "n": 12000,
+        "per_class_recall": {
+          "angry": 0.07,
+          "happy": 0.1027,
+          "neutral": 0.7607,
+          "sad": 0.2447
+        },
+        "confusion": {
+          "angry": {
+            "neutral": 2113,
+            "happy": 310,
+            "angry": 210,
+            "sad": 367
+          },
+          "happy": {
+            "neutral": 2172,
+            "happy": 308,
+            "sad": 494,
+            "angry": 26
+          },
+          "neutral": {
+            "neutral": 2282,
+            "happy": 224,
+            "sad": 459,
+            "angry": 35
+          },
+          "sad": {
+            "neutral": 2038,
+            "sad": 734,
+            "happy": 215,
+            "angry": 13
+          }
+        }
+      }
+    }
+  },
+  "voxinstruct/gender": {
+    "n_rows": 6000,
+    "attributes": {
+      "gender": {
+        "controllability_acc": 0.8755,
+        "uar": 0.8755,
+        "n": 6000,
+        "per_class_recall": {
+          "female": 0.9747,
+          "male": 0.7763
+        },
+        "confusion": {
+          "female": {
+            "female": 2924,
+            "male": 76
+          },
+          "male": {
+            "female": 671,
+            "male": 2329
+          }
+        }
+      }
+    }
+  },
+  "voxinstruct/gender_x_age": {
+    "n_rows": 48000,
+    "attributes": {
+      "age": {
+        "controllability_acc": 0.3433,
+        "uar": 0.3433,
+        "n": 48000,
+        "per_class_recall": {
+          "child": 0.0415,
+          "elderly": 0.166,
+          "middle_aged": 0.3587,
+          "young_adult": 0.8069
+        },
+        "confusion": {
+          "child": {
+            "young_adult": 9984,
+            "middle_aged": 1402,
+            "child": 498,
+            "elderly": 116
+          },
+          "elderly": {
+            "middle_aged": 5856,
+            "young_adult": 4052,
+            "elderly": 1992,
+            "child": 100
+          },
+          "middle_aged": {
+            "young_adult": 6932,
+            "middle_aged": 4304,
+            "elderly": 581,
+            "child": 183
+          },
+          "young_adult": {
+            "young_adult": 9683,
+            "child": 461,
+            "middle_aged": 1730,
+            "elderly": 126
+          }
+        }
+      },
+      "gender": {
+        "controllability_acc": 0.8907,
+        "uar": 0.8907,
+        "n": 48000,
+        "per_class_recall": {
+          "female": 0.9634,
+          "male": 0.818
+        },
+        "confusion": {
+          "female": {
+            "female": 23121,
+            "male": 879
+          },
+          "male": {
+            "male": 19632,
+            "female": 4368
+          }
+        }
+      }
+    },
+    "per_cell": {
+      "female_child": {
+        "n": 6000,
+        "age_acc": 0.042,
+        "gender_acc": 0.971,
+        "both_acc": 0.0395
+      },
+      "female_elderly": {
+        "n": 6000,
+        "age_acc": 0.139,
+        "gender_acc": 0.9362,
+        "both_acc": 0.1307
+      },
+      "female_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.3855,
+        "gender_acc": 0.968,
+        "both_acc": 0.3777
+      },
+      "female_young_adult": {
+        "n": 6000,
+        "age_acc": 0.8177,
+        "gender_acc": 0.9783,
+        "both_acc": 0.8018
+      },
+      "male_child": {
+        "n": 6000,
+        "age_acc": 0.041,
+        "gender_acc": 0.6295,
+        "both_acc": 0.0343
+      },
+      "male_elderly": {
+        "n": 6000,
+        "age_acc": 0.193,
+        "gender_acc": 0.8957,
+        "both_acc": 0.18
+      },
+      "male_middle_aged": {
+        "n": 6000,
+        "age_acc": 0.3318,
+        "gender_acc": 0.891,
+        "both_acc": 0.2897
+      },
+      "male_young_adult": {
+        "n": 6000,
+        "age_acc": 0.7962,
+        "gender_acc": 0.8558,
+        "both_acc": 0.689
+      }
+    }
+  }
+}

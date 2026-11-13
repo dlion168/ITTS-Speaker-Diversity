@@ -1,0 +1,9 @@
+set,encoder,n,seed,vendi,mpcd
+real,modelscope_campplus,3000,42,25.9681,0.623468
+real,modelscope_eres2net,3000,42,26.2474,0.617764
+real,modelscope_eres2netv2,3000,42,27.2513,0.625854
+real,nemo_titanet,3000,42,94.8893,0.943128
+real,speechbrain_ecapa,3000,42,102.4433,0.923358
+real,speechbrain_resnet,3000,42,101.6236,0.908198
+real,wespeaker,3000,42,98.2174,0.912504
+real,wespeaker_voxblink2_resnet152_16k,3000,42,70.0945,0.843968

@@ -1,0 +1,189 @@
+{
+  "tag": "6cls_whisper",
+  "labels": [
+    "North America",
+    "English",
+    "South Asia",
+    "Germanic",
+    "Oceania",
+    "South African"
+  ],
+  "corpora": {
+    "saa": {
+      "channel": "read paragraph (near-native)",
+      "acc": 0.8625,
+      "uar": 0.8047,
+      "n": 669,
+      "n_unscorable": 0,
+      "per_region_recall": {
+        "English": 0.9079,
+        "Germanic": 0.2892,
+        "North America": 0.976,
+        "Oceania": 0.9,
+        "South African": 1.0,
+        "South Asia": 0.7551
+      },
+      "per_region_n": {
+        "English": 76,
+        "Germanic": 83,
+        "North America": 417,
+        "Oceania": 40,
+        "South African": 4,
+        "South Asia": 49
+      },
+      "confusion": {
+        "English": {
+          "South African": 2,
+          "English": 69,
+          "North America": 4,
+          "Germanic": 1
+        },
+        "Germanic": {
+          "English": 48,
+          "Germanic": 24,
+          "North America": 9,
+          "South African": 2
+        },
+        "North America": {
+          "North America": 407,
+          "English": 4,
+          "Oceania": 2,
+          "South African": 4
+        },
+        "Oceania": {
+          "English": 3,
+          "Oceania": 36,
+          "North America": 1
+        },
+        "South African": {
+          "South African": 4
+        },
+        "South Asia": {
+          "South Asia": 37,
+          "North America": 6,
+          "South African": 5,
+          "Germanic": 1
+        }
+      }
+    },
+    "nchlt": {
+      "channel": "prompted read (studio)",
+      "acc": 0.8228,
+      "uar": 0.8228,
+      "n": 3053,
+      "n_unscorable": 0,
+      "per_region_recall": {
+        "South African": 0.8228
+      },
+      "per_region_n": {
+        "South African": 3053
+      },
+      "confusion": {
+        "South African": {
+          "South African": 2512,
+          "South Asia": 59,
+          "Oceania": 184,
+          "North America": 38,
+          "English": 252,
+          "Germanic": 8
+        }
+      }
+    },
+    "edacc": {
+      "channel": "spontaneous conversation",
+      "acc": 0.5862,
+      "uar": 0.5609,
+      "n": 1525,
+      "n_unscorable": 2273,
+      "per_region_recall": {
+        "English": 0.6484,
+        "Germanic": 0.0455,
+        "North America": 0.3928,
+        "South African": 0.9103,
+        "South Asia": 0.8075
+      },
+      "per_region_n": {
+        "English": 765,
+        "Germanic": 22,
+        "North America": 499,
+        "South African": 78,
+        "South Asia": 161
+      },
+      "confusion": {
+        "English": {
+          "Oceania": 27,
+          "North America": 81,
+          "English": 496,
+          "South African": 139,
+          "South Asia": 10,
+          "Germanic": 12
+        },
+        "Germanic": {
+          "English": 16,
+          "Oceania": 1,
+          "South African": 3,
+          "Germanic": 1,
+          "North America": 1
+        },
+        "North America": {
+          "North America": 196,
+          "South African": 97,
+          "English": 91,
+          "Germanic": 35,
+          "South Asia": 75,
+          "Oceania": 5
+        },
+        "South African": {
+          "South African": 71,
+          "Oceania": 6,
+          "English": 1
+        },
+        "South Asia": {
+          "North America": 1,
+          "South Asia": 130,
+          "South African": 28,
+          "English": 2
+        }
+      }
+    },
+    "vctk": {
+      "channel": "studio read",
+      "acc": 0.8767,
+      "uar": 0.8767,
+      "n": 600,
+      "n_unscorable": 0,
+      "per_region_recall": {
+        "English": 0.8333,
+        "North America": 0.92
+      },
+      "per_region_n": {
+        "English": 300,
+        "North America": 300
+      },
+      "confusion": {
+        "English": {
+          "North America": 33,
+          "English": 250,
+          "South African": 2,
+          "Oceania": 14,
+          "South Asia": 1
+        },
+        "North America": {
+          "North America": 276,
+          "English": 12,
+          "Oceania": 11,
+          "South African": 1
+        }
+      }
+    }
+  },
+  "pooled_per_region_recall": {
+    "English": 0.7143,
+    "Germanic": 0.2381,
+    "North America": 0.7229,
+    "Oceania": 0.9,
+    "South African": 0.8252,
+    "South Asia": 0.7952
+  },
+  "pooled_uar": 0.6993
+}
