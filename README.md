@@ -32,6 +32,7 @@ measuring controllability (§3.5, §5).
 - [Environments](#environments)
 - [Repository layout](#repository-layout)
 - [Tests](#tests)
+- [License](#license)
 
 ## What is evaluated
 
@@ -194,6 +195,9 @@ python metrics/tests/test_diversity_metrics.py   # analytic checks of the four m
 python -m unittest discover -s generation/tests -v   # generation plans and seeds
 ```
 
-## License and citation
+## License
 
-To be added.
+The code is under the MIT License (`LICENSE`). The data files (`data/`, `results/`,
+`controllability/accent_classifier/data_build/source_manifests/`) and the released audio and
+embeddings are under CC BY-NC 4.0; text from third-party corpora keeps its corpus license
+(`DATA_LICENSE.md`). Third-party code and model weights: `NOTICE.md`.
